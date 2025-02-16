@@ -46,6 +46,8 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
+import com.hollingsworth.arsnouveau.api.util.SourceUtil;
+
 import net.mcreator.arsartillery.init.ArsArtilleryModItems;
 import net.mcreator.arsartillery.init.ArsArtilleryModEntities;
 
