@@ -262,6 +262,7 @@ public class ConjurationTurret3Entity extends Animal implements RangedAttackMob,
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float flval) {
+		if (SourceUtil.takeSourceWithParticles(this.blockPosition(), this.level(), 10, 15 + 20 * 3) == null) return;
 		ConjurationShotEntity.shoot(this, target);
 	}
 

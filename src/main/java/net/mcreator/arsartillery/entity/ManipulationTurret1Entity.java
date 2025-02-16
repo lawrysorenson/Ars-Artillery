@@ -262,6 +262,7 @@ public class ManipulationTurret1Entity extends Animal implements RangedAttackMob
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float flval) {
+		if (SourceUtil.takeSourceWithParticles(this.blockPosition(), this.level(), 10, 15 + 20 * 1) == null) return;
 		ManipulationShotEntity.shoot(this, target);
 	}
 

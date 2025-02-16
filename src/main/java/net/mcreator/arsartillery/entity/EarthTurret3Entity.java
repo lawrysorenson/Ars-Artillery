@@ -264,6 +264,7 @@ public class EarthTurret3Entity extends Animal implements RangedAttackMob, GeoEn
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float flval) {
+		if (SourceUtil.takeSourceWithParticles(this.blockPosition(), this.level(), 10, 15 + 20 * 3) == null) return;
 		Earthshot3Entity.shoot(this, target);
 	}
 

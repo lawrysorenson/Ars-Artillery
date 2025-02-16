@@ -159,6 +159,12 @@ public class ManipulationTurret3Entity extends Animal implements GeoEntity {
 	}
 
 	@Override
+	public void performRangedAttack(LivingEntity target, float flval) {
+		if (SourceUtil.takeSourceWithParticles(this.blockPosition(), this.level(), 10, 15 + 20 * 3) == null) return;
+		ManipulationShotEntity.shoot(this, target);
+	}
+
+	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
 		ManipulationTurret3Entity retval = ArsArtilleryModEntities.MANIPULATION_TURRET_3.get().create(serverWorld);
 		retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), MobSpawnType.BREEDING, null, null);

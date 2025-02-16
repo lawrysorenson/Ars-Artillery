@@ -266,6 +266,7 @@ public class AirTurret2Entity extends Animal implements RangedAttackMob, GeoEnti
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float flval) {
+		if (SourceUtil.takeSourceWithParticles(this.blockPosition(), this.level(), 10, 15 + 20 * 2) == null) return;
 		Airshot2Entity.shoot(this, target);
 	}
 

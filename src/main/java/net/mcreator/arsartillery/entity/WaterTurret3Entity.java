@@ -264,6 +264,7 @@ public class WaterTurret3Entity extends Animal implements RangedAttackMob, GeoEn
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float flval) {
+		if (SourceUtil.takeSourceWithParticles(this.blockPosition(), this.level(), 10, 15 + 20 * 3) == null) return;
 		Watershot3Entity.shoot(this, target);
 	}
 
