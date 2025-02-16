@@ -45,8 +45,14 @@ minecraft {
     }
 }
 
+repositories {
+    maven { url 'https://maven.blamejared.com' }
+}
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+
+    implementation "com.hollingsworth.ars_nouveau:ars_nouveau-1.20.1:4.12.6.256"
 }
 
 tasks.withType(JavaCompile).configureEach {
