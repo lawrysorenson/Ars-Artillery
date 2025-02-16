@@ -15,6 +15,8 @@ import net.mcreator.arsartillery.entity.AbjurationTurret3Entity;
 import net.mcreator.arsartillery.entity.AbjurationTurret2Entity;
 import net.mcreator.arsartillery.entity.AbjurationTurret1Entity;
 
+import com.hollingsworth.arsnouveau.api.util.SourceUtil;
+
 import java.util.List;
 import java.util.Comparator;
 
@@ -22,12 +24,16 @@ public class AbjurationAuraProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		boolean found = false;
+		int cost = 1;
+		if (entity instanceof AbjurationTurret2Entity) cost++;
+		if (entity instanceof AbjurationTurret3Entity) cost++;
 		double sx = 0;
 		double sy = 0;
 		double sz = 0;
-		entity.getPersistentData().putDouble("counter1", (entity.getPersistentData().getDouble("counter1") + 1));
-		if (entity.getPersistentData().getDouble("counter1") % 100 == 0) {
+		final int DURATION = 21*20;
+		entity.getPersistentData().putLong("counter1", (entity.getPersistentData().getLong("counter1") + 1));
+		if (entity.getPersistentData().getLong("counter1") % (DURATION - 20) == 0) {
+			if (SourceUtil.takeSourceWithParticles(entity.blockPosition(), entity.level(), 10, 10 * cost) == null) return;
 			if (entity instanceof AbjurationTurret1Entity) {
 				{
 					final Vec3 _center = new Vec3(x, y, z);
@@ -35,7 +41,7 @@ public class AbjurationAuraProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("ars_artillery:turrets")))) {
 							if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 120, 0, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, DURATION, 0, false, false));
 						}
 					}
 				}
@@ -46,9 +52,9 @@ public class AbjurationAuraProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("ars_artillery:turrets")))) {
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 120, 0, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, DURATION, 0, false, false));
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 120, 1, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, DURATION, 1, false, false));
 						}
 					}
 				}
@@ -59,11 +65,11 @@ public class AbjurationAuraProcedure {
 					for (Entity entityiterator : _entfound) {
 						if (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("ars_artillery:turrets")))) {
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 120, 0, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, DURATION, 0, false, false));
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 120, 1, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, DURATION, 1, false, false));
 							if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
-								_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, 0, false, false));
+								_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, DURATION, 0, false, false));
 						}
 					}
 				}
